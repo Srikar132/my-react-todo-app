@@ -1,0 +1,29 @@
+
+:root {
+    --Very-Light-Gray: hsl(0, 0%, 98%);
+    --Very-Light-Grayish-Blue: hsl(236, 33%, 92%);
+    --Light-Grayish-Blue: hsla(233, 11%, 84%, 0);
+    --Dark-Grayish-Blue: hsl(236, 9%, 61%);
+    --Very-Dark-Grayish-Blue: hsl(235, 19%, 35%)
+}
+
+.Bright {
+    background-color: #fff !important;
+    color: var(--Very-Dark-Grayish-Blue) !important;
+}
+
+.taskbarHover:hover {
+    color: var(--Dark-Grayish-Blue) !important;
+}
+
+.inputcolor {
+    color: hsl(235, 24%, 19%) !important;
+}
+
+.buttonhover {
+    color: hsl(236, 9%, 61%) !important;
+}
+
+.buttonhover:hover {
+    color:  var(--Very-Dark-Grayish-Blue) !important;
+}
