@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { startTransition, useEffect, useRef, useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import sunImg from './assets/images/icon-sun.svg';
@@ -11,6 +11,27 @@ function App() {
   const [todoData,setTodoData] = useState([]);
   const inputRef = useRef(null);
   const [theme,setTheme] = useState('dark');
+
+  const loadTodoData = () => {
+    const savedData = JSON.parse(localStorage.getItem("todoData")) || [];
+    setTodoData(savedData);
+  };
+
+  const saveTodoData = () => {
+    localStorage.setItem("todoData", JSON.stringify(todoData));
+  };  
+
+  useEffect(() => {
+    window.addEventListener("load", loadTodoData);
+    window.addEventListener("beforeunload", saveTodoData);
+
+    return () => {
+      window.removeEventListener("load", loadTodoData);
+      window.removeEventListener("beforeunload", saveTodoData);
+    };
+  }, [todoData]);
+
+
   const handleForm = (event) => {
     event.preventDefault();
     const inputValue = inputRef.current.value ;
@@ -28,16 +49,8 @@ function App() {
     }
   };
 
-  useEffect( () => {
-    const savedData = JSON.parse(localStorage.getItem("todoData"));
-    if(savedData) {
-        setTodoData(savedData);
-    }
-  },[]);
 
-  useEffect( () => {
-    localStorage.setItem("todoData",JSON.stringify(todoData));
-  } , [todoData]);
+
 
   function handleCheck(index) {
     let newData = [...todoData];
@@ -81,6 +94,7 @@ function App() {
     }
     
   },[theme]);
+
 
 
   return (
