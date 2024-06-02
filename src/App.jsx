@@ -29,9 +29,9 @@ function App() {
   };
 
   useEffect( () => {
-    const savedData = JSON.parse(localStorage.getItem("todoData")) || [];
-    return () => {
-      setTodoData(savedData);
+    const savedData = JSON.parse(localStorage.getItem("todoData"));
+    if(savedData) {
+        setTodoData(savedData);
     }
   },[]);
 
